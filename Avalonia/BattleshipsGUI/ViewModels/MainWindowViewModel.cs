@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows.Input;
 using System.Linq;
 using System.Reactive.Linq;
@@ -12,14 +13,95 @@ using ReactiveUI;
 namespace BattleshipsGUI.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase {
-
-    private string? _text;
-    public string? Text {
-        get => _text;
-        set => this.RaiseAndSetIfChanged(ref _text, value);
+    public static string?[,] Board = { 
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" }, 
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" } 
+    };
+    
+    private bool _right;
+    public bool Right {
+        get => _right;
+        set => this.RaiseAndSetIfChanged(ref _right, value);
     }
 
+    private int _carriers;
+    public int Carriers {
+        get => _carriers;
+        set {
+            this.RaiseAndSetIfChanged(ref _carriers, value);
+            File.WriteAllText("./Ships/Carrier.txt",_carriers.ToString());
+        }
+    }
+
+    private int _destroyers;
+    public int Destroyers {
+        get => _destroyers;
+        set { 
+            this.RaiseAndSetIfChanged(ref _destroyers, value);
+            File.WriteAllText("./Ships/Destroyer.txt",_destroyers.ToString());
+        }
+    }
+
+    private int _ships;
+    public int Ships {
+        get => _ships;
+        set {
+            this.RaiseAndSetIfChanged(ref _ships, value);
+            File.WriteAllText("./Ships/Ship.txt",_ships.ToString());
+        }
+    }
+
+    private int _patrols;
+    public int Patrols {
+        get => _patrols;
+        set {
+            this.RaiseAndSetIfChanged(ref _patrols, value);
+            File.WriteAllText("./Ships/Patrol.txt",_patrols.ToString());
+        }
+    }
+
+    private int[] _count = new int[4];
+
+    public void BoardValues() {
+        int carrier = int.Parse(File.ReadAllText("./Ships/Carrier.txt"));
+        int destroyer = int.Parse(File.ReadAllText("./Ships/Destroyer.txt"));
+        int ship = int.Parse(File.ReadAllText("./Ships/Ship.txt"));
+        int patrol = int.Parse(File.ReadAllText("./Ships/Patrol.txt"));
+        int[] count = { carrier, destroyer, ship, patrol };
+        for (int i = 0; i < 4; i++) {
+            if (count[i] == -1) {
+                Random r = new Random();
+                switch (i) {
+                    case 0: count[i] = r.Next(3); break;
+                    case 1: count[i] = r.Next(4); break;
+                    case 2: count[i] = r.Next(6); break;
+                    case 3: count[i] = r.Next(-1,9); break;
+                }
+            }
+        }
+
+        if (count[3] == 9) { count[3] = -1; } 
+        _count = new int[] { count[0]+1, count[1]+1, count[2]+1, count[3]+1  };
+    }
+
+    private int _boardCount;
+    public void MakeTheBoard() {
+        _boardCount = Battleships.MakeBoard(Battleships.Bot, _count);
+    }
     
+    private int _botCount;
+    public void MakePlayerBoard() {
+        _botCount = Battleships.MakeBoard(Battleships.Player, _count);
+        Board = Battleships.Player;
+    }
     
     public string GetName(string name) {
         int row = int.Parse(name[1].ToString());
@@ -28,32 +110,6 @@ public class MainWindowViewModel : ViewModelBase {
         string? plot = Battleships.Bot[row, col];
         return plot == "" ? "X" : plot![0].ToString();
     }
-
-    public bool MakeTheBoard() {
-        if (Regex.IsMatch(_text, "^[1-3],[1-4],[1-6],[0-8]$")) {
-            int[] count = new int[] {
-                int.Parse(_text[0].ToString()), int.Parse(_text[0].ToString()), int.Parse(_text[0].ToString()),
-                int.Parse(_text[0].ToString())
-            };
-            Battleships.MakeBoard(Battleships.Bot, count);
-            return true;
-        }
-
-        return false;
-    }
-
-    public bool MakePlayerBoard() {
-        if (Regex.IsMatch(_text, "^[1-3],[1-4],[1-6],[0-8]$")) {
-            int[] count = new int[] {
-                int.Parse(_text[0].ToString()), int.Parse(_text[0].ToString()), int.Parse(_text[0].ToString()),
-                int.Parse(_text[0].ToString())
-            };
-            Battleships.MakeBoard(Battleships.Player, count);
-            return true;
-        }
-
-        return false;
-    }
     
     public string GetPlayerName(string name) {
         int row = int.Parse(name[1].ToString());
@@ -61,6 +117,19 @@ public class MainWindowViewModel : ViewModelBase {
 
         string? plot = Battleships.Player[row, col];
         return plot == "" ? "X" : plot![0].ToString();
+    }
+
+    public void SinkShip() {
+        int row = new Random().Next(10);
+        int col = new Random().Next(10);
+        S00 = "H";
+    }
+
+    public string? S00 {
+        get => Board[0, 0];
+        set {
+            this.RaiseAndSetIfChanged(ref Board[0, 0], value);
+        }
     }
 }
 
@@ -112,11 +181,11 @@ class Battleships {
                             }
 
                             validplace = true;
-                            board[row,col] = "Carrier";
-                            board[row - 1,col] = "Carrier";
-                            board[row - 2,col] = "Carrier";
-                            board[row - 3,col] = "Carrier";
-                            board[row - 4,col] = "Carrier";
+                            board[row,col] = "Carrier" + x.ToString();
+                            board[row - 1,col] = "Carrier" + x.ToString();
+                            board[row - 2,col] = "Carrier" + x.ToString();
+                            board[row - 3,col] = "Carrier" + x.ToString();
+                            board[row - 4,col] = "Carrier" + x.ToString();
                             break;
                         case 1: // Right
                             if (col > 5 || board[row,col] != "" || board[row,col + 1] != "" ||
@@ -125,11 +194,11 @@ class Battleships {
                             }
 
                             validplace = true;
-                            board[row,col] = "Carrier";
-                            board[row,col + 1] = "Carrier";
-                            board[row,col + 2] = "Carrier";
-                            board[row,col + 3] = "Carrier";
-                            board[row,col + 4] = "Carrier";
+                            board[row,col] = "Carrier" + x.ToString();
+                            board[row,col + 1] = "Carrier" + x.ToString();
+                            board[row,col + 2] = "Carrier" + x.ToString();
+                            board[row,col + 3] = "Carrier" + x.ToString();
+                            board[row,col + 4] = "Carrier" + x.ToString();
                             break;
                         case 2: // Down
                             if (row > 5 || board[row,col] != "" || board[row + 1,col] != "" ||
@@ -138,11 +207,11 @@ class Battleships {
                             }
 
                             validplace = true;
-                            board[row,col] = "Carrier";
-                            board[row + 1,col] = "Carrier";
-                            board[row + 2,col] = "Carrier";
-                            board[row + 3,col] = "Carrier";
-                            board[row + 4,col] = "Carrier";
+                            board[row,col] = "Carrier" + x.ToString();
+                            board[row + 1,col] = "Carrier" + x.ToString();
+                            board[row + 2,col] = "Carrier" + x.ToString();
+                            board[row + 3,col] = "Carrier" + x.ToString();
+                            board[row + 4,col] = "Carrier" + x.ToString();
                             break;
                         case 3: // Left
                             if (col < 4 || board[row,col] != "" || board[row,col - 1] != "" ||
@@ -151,11 +220,11 @@ class Battleships {
                             }
 
                             validplace = true;
-                            board[row,col] = "Carrier";
-                            board[row,col - 1] = "Carrier";
-                            board[row,col - 2] = "Carrier";
-                            board[row,col - 3] = "Carrier";
-                            board[row,col - 4] = "Carrier";
+                            board[row,col] = "Carrier" + x.ToString();
+                            board[row,col - 1] = "Carrier" + x.ToString();
+                            board[row,col - 2] = "Carrier" + x.ToString();
+                            board[row,col - 3] = "Carrier" + x.ToString();
+                            board[row,col - 4] = "Carrier" + x.ToString();
                             break;
                     }
                 }
@@ -177,10 +246,10 @@ class Battleships {
                             }
 
                             validplace = true;
-                            board[row,col] = "Destroyer";
-                            board[row - 1,col] = "Destroyer";
-                            board[row - 2,col] = "Destroyer";
-                            board[row - 3,col] = "Destroyer";
+                            board[row,col] = "Destroyer" + x.ToString();
+                            board[row - 1,col] = "Destroyer" + x.ToString();
+                            board[row - 2,col] = "Destroyer" + x.ToString();
+                            board[row - 3,col] = "Destroyer" + x.ToString();
                             break;
                         case 1: // Right
                             if (col > 6 || board[row,col] != "" || board[row,col + 1] != "" ||
@@ -189,10 +258,10 @@ class Battleships {
                             }
 
                             validplace = true;
-                            board[row,col] = "Destroyer";
-                            board[row,col + 1] = "Destroyer";
-                            board[row,col + 2] = "Destroyer";
-                            board[row,col + 3] = "Destroyer";
+                            board[row,col] = "Destroyer" + x.ToString();
+                            board[row,col + 1] = "Destroyer" + x.ToString();
+                            board[row,col + 2] = "Destroyer" + x.ToString();
+                            board[row,col + 3] = "Destroyer" + x.ToString();
                             break;
                         case 2: // Down
                             if (row > 6 || board[row,col] != "" || board[row + 1,col] != "" ||
@@ -201,10 +270,10 @@ class Battleships {
                             }
 
                             validplace = true;
-                            board[row,col] = "Destroyer";
-                            board[row + 1,col] = "Destroyer";
-                            board[row + 2,col] = "Destroyer";
-                            board[row + 3,col] = "Destroyer";
+                            board[row,col] = "Destroyer" + x.ToString();
+                            board[row + 1,col] = "Destroyer" + x.ToString();
+                            board[row + 2,col] = "Destroyer" + x.ToString();
+                            board[row + 3,col] = "Destroyer" + x.ToString();
                             break;
                         case 3: // Left
                             if (col < 3 || board[row,col] != "" || board[row,col - 1] != "" ||
@@ -213,10 +282,10 @@ class Battleships {
                             }
 
                             validplace = true;
-                            board[row,col] = "Destroyer";
-                            board[row,col - 1] = "Destroyer";
-                            board[row,col - 2] = "Destroyer";
-                            board[row,col - 3] = "Destroyer";
+                            board[row,col] = "Destroyer" + x.ToString();
+                            board[row,col - 1] = "Destroyer" + x.ToString();
+                            board[row,col - 2] = "Destroyer" + x.ToString();
+                            board[row,col - 3] = "Destroyer" + x.ToString();
                             break;
                     }
                 }
@@ -238,9 +307,9 @@ class Battleships {
                             }
 
                             validplace = true;
-                            board[row,col] = "Ship";
-                            board[row - 1,col] = "Ship";
-                            board[row - 2,col] = "Ship";
+                            board[row,col] = "Ship" + x.ToString();
+                            board[row - 1,col] = "Ship" + x.ToString();
+                            board[row - 2,col] = "Ship" + x.ToString();
                             break;
                         case 1: // Right
                             if (col > 7 || board[row,col] != "" || board[row,col + 1] != "" ||
@@ -249,9 +318,9 @@ class Battleships {
                             }
 
                             validplace = true;
-                            board[row,col] = "Ship";
-                            board[row,col + 1] = "Ship";
-                            board[row,col + 2] = "Ship";
+                            board[row,col] = "Ship" + x.ToString();
+                            board[row,col + 1] = "Ship" + x.ToString();
+                            board[row,col + 2] = "Ship" + x.ToString();
                             break;
                         case 2: // Down
                             if (row > 7 || board[row,col] != "" || board[row + 1,col] != "" ||
@@ -260,9 +329,9 @@ class Battleships {
                             }
 
                             validplace = true;
-                            board[row,col] = "Ship";
-                            board[row + 1,col] = "Ship";
-                            board[row + 2,col] = "Ship";
+                            board[row,col] = "Ship" + x.ToString();
+                            board[row + 1,col] = "Ship" + x.ToString();
+                            board[row + 2,col] = "Ship" + x.ToString();
                             break;
                         case 3: // Left
                             if (col < 2 || board[row,col] != "" || board[row,col - 1] != "" ||
@@ -271,9 +340,9 @@ class Battleships {
                             }
 
                             validplace = true;
-                            board[row,col] = "Ship";
-                            board[row,col - 1] = "Ship";
-                            board[row,col - 2] = "Ship";
+                            board[row,col] = "Ship" + x.ToString();
+                            board[row,col - 1] = "Ship" + x.ToString();
+                            board[row,col - 2] = "Ship" + x.ToString();
                             break;
                     }
                 }
@@ -294,8 +363,8 @@ class Battleships {
                             }
 
                             validplace = true;
-                            board[row,col] = "Patrol";
-                            board[row - 1,col] = "Patrol";
+                            board[row,col] = "Patrol" + x.ToString();
+                            board[row - 1,col] = "Patrol" + x.ToString();
                             break;
                         case 1: // Right
                             if (col > 8 || board[row,col] != "" || board[row,col + 1] != "") {
@@ -303,8 +372,8 @@ class Battleships {
                             }
 
                             validplace = true;
-                            board[row,col] = "Patrol";
-                            board[row,col + 1] = "Patrol";
+                            board[row,col] = "Patrol" + x.ToString();
+                            board[row,col + 1] = "Patrol" + x.ToString();
                             break;
                         case 2: // Down
                             if (row > 8 || board[row,col] != "" || board[row + 1,col] != "") {
@@ -312,8 +381,8 @@ class Battleships {
                             }
 
                             validplace = true;
-                            board[row,col] = "Patrol";
-                            board[row + 1,col] = "Patrol";
+                            board[row,col] = "Patrol" + x.ToString();
+                            board[row + 1,col] = "Patrol" + x.ToString();
                             break;
                         case 3: // Left
                             if (col < 1 || board[row,col] != "" || board[row,col - 1] != "") {
@@ -321,8 +390,8 @@ class Battleships {
                             }
 
                             validplace = true;
-                            board[row,col] = "Patrol";
-                            board[row,col - 1] = "Patrol";
+                            board[row,col] = "Patrol" + x.ToString();
+                            board[row,col - 1] = "Patrol" + x.ToString();
                             break;
                     }
                 }

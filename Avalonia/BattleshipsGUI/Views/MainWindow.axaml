@@ -14,7 +14,7 @@
         WindowStartupLocation="CenterScreen">
 
     <Design.DataContext>
-        <vm:MainWindowViewModel />
+        <vm:MainWindowViewModel/>
     </Design.DataContext>
     
     <Panel>
@@ -24,12 +24,14 @@
                     BackgroundSource="Digger"
                     TintColor="Black"
                     TintOpacity="1"
-                    MaterialOpacity="0.65" />
+                    MaterialOpacity="0.65"/>
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
         
-        <Panel Margin="40">
-            <views:GameplayView />
+        <Panel Margin="20">
+            <views:GameplayView/>
         </Panel>
+        
+        <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" Content="H"/>
     </Panel>
 </Window>
