@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -9,7 +11,6 @@ namespace BattleshipsGUI.Views;
 
 public partial class GameplayView : UserControl {
     private MainWindowViewModel _mwvm = new MainWindowViewModel();
-    private bool _gameStarted = false;
     public GameplayView() {
         InitializeComponent();
     }
@@ -20,16 +21,25 @@ public partial class GameplayView : UserControl {
     
     private void ButtonOnClick(object? o, RoutedEventArgs e) {
         ((Button)o).Content = _mwvm.GetName(((Button)o).Name);
+        _mwvm.SinkShip();
         ((Button)o).IsEnabled = false;
     }
     private void StartTheGame(object? o, RoutedEventArgs e) {
-        bool b = _mwvm.MakeTheBoard();
-        bool p = _mwvm.MakePlayerBoard();
-        
+        _mwvm.BoardValues();
+        _mwvm.MakeTheBoard();
+        _mwvm.MakePlayerBoard();
         ((Button)o!).IsEnabled = false;
     }
 
     private void ButtonChecked(object? o, RoutedEventArgs e) {
         ((Button)o).Content = _mwvm.GetPlayerName(((Button)o).Name);
+    }
+
+    private void BeingInitialised(object? o, EventArgs e) {
+        string[] ships = { "Carrier", "Destroyer", "Ship", "Patrol" };
+        Directory.CreateDirectory("./Ships");
+        foreach (string ship in ships) {
+            File.WriteAllText("./Ships/" + ship + ".txt","-1");
+        }
     }
 }
