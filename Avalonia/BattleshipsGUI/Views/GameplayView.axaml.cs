@@ -12,6 +12,17 @@ namespace BattleshipsGUI.Views;
 public partial class GameplayView : UserControl {
     private MainWindowViewModel _mwvm = new MainWindowViewModel();
     public GameplayView() {
+        Directory.CreateDirectory("./Ships");
+        File.WriteAllText("./Ships/" + "Carrier" + ".txt","-1");
+        File.WriteAllText("./Ships/" + "Destroyer" + ".txt","-1");
+        File.WriteAllText("./Ships/" + "Ship" + ".txt","-1");
+        File.WriteAllText("./Ships/" + "Patrol" + ".txt","-1");
+        Directory.CreateDirectory("./Board");
+        for (int a = 0; a < 10; a++) {
+            for (int b = 0; b < 10; b++) {
+                File.WriteAllText("./Board/P" + a.ToString() + b.ToString() + ".txt","O");
+            }
+        }
         InitializeComponent();
     }
 
@@ -36,10 +47,5 @@ public partial class GameplayView : UserControl {
     }
 
     private void BeingInitialised(object? o, EventArgs e) {
-        string[] ships = { "Carrier", "Destroyer", "Ship", "Patrol" };
-        Directory.CreateDirectory("./Ships");
-        foreach (string ship in ships) {
-            File.WriteAllText("./Ships/" + ship + ".txt","-1");
-        }
     }
 }

@@ -5,6 +5,9 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="BattleshipsGUI.Views.GameplayView">
     <Panel>
+        
+        <CheckBox Name="CheckBox"/>
+        
         <ExperimentalAcrylicBorder IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>
                 <ExperimentalAcrylicMaterial
@@ -48,7 +51,7 @@
                 
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
                     <StackPanel Orientation="Vertical" Margin="0 0 30 0" HorizontalAlignment="Left">
-                        <TextBlock Text="Enemy Board:"/>
+                        <TextBlock Text="Enemy Board:" HorizontalAlignment="Center"/>
                         <Grid RowDefinitions="*,*,*,*,*,*,*,*,*,*">
                             <Grid Grid.Row="0" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
                                 <Button Grid.Column="0" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B00"/>
@@ -173,10 +176,10 @@
                         </Grid>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="30 0 0 0" HorizontalAlignment="Right">
-                        <TextBlock Text="Player Board:"/>
+                        <TextBlock Text="Player Board:" HorizontalAlignment="Center"/>
                         <Grid RowDefinitions="*,*,*,*,*,*,*,*,*,*">
                             <Grid Grid.Row="0" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <ToggleButton Grid.Column="0" Content="{Binding S00}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P00"/>
+                                <ToggleButton Grid.Column="0" Content="{Binding Path=PlayerBoard[0][0].value}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P00"/>
                                 <ToggleButton Grid.Column="1" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P01"/>
                                 <ToggleButton Grid.Column="2" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P02"/>
                                 <ToggleButton Grid.Column="3" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P03"/>
