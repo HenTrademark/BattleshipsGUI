@@ -101,8 +101,8 @@ public class MainWindowViewModel : ViewModelBase {
     
     private int _botCount;
     public void MakePlayerBoard() {
-        _botCount = Battleships.MakeBoard(Battleships.Player, _count);
-        Board = Battleships.Player;
+        _botCount = Battleships.MakeBoard(PlayerBoard, _count);
+        Board = PlayerBoard;
     }
     
     public string GetName(string name) {
@@ -117,7 +117,7 @@ public class MainWindowViewModel : ViewModelBase {
         int row = int.Parse(name[1].ToString());
         int col = int.Parse(name[2].ToString());
 
-        string? plot = Battleships.Player[row, col];
+        string? plot = PlayerBoard[row, col];
         return plot == "O" ? "X" : plot![0].ToString();
     }
 
@@ -128,20 +128,37 @@ public class MainWindowViewModel : ViewModelBase {
         col = 0;
         
 
-        PlayerBoard[row,col] = "Haha";
+        PB[row,col] = "Haha";
     }
-
-    public string?[,] PlayerBoard {
-        get => Battleships.Player;
+    
+    private string?[,] PB {
+        get => PlayerBoard;
         set {
-            this.RaiseAndSetIfChanged(ref Battleships.Player, value);
+            this.RaiseAndSetIfChanged(ref PlayerBoard, value);
             for (int row = 0; row < 10; row++) {
                 for (int col = 0; col < 10; col++) {
-                    File.WriteAllText("./Board/P" + row.ToString() + col.ToString(),Battleships.Player[row,col] ?? "".ToString());
+                    File.WriteAllText("./Board/P" + row.ToString() + col.ToString(),PlayerBoard[row,col] ?? "".ToString());
                 }
             }
         }
     }
+
+    public void Clicked() {
+        PB[0, 0] = "Haha";
+    }
+
+    public string?[,] PlayerBoard = { 
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" }, 
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" } 
+    };
 }
 
 class Battleships {
