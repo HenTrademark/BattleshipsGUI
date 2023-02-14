@@ -46,8 +46,8 @@
                 </Grid>
                 <Button HorizontalAlignment="Center" VerticalAlignment="Top"
                         IsEnabled="True" Content="Start Game"
-                        Click="StartTheGame" Margin="10"
-                        Name="StartGame" Initialized="BeingInitialised"/>
+                        Command="{Binding StartTheGame}" Margin="10"
+                        Click="StartTheGame" Name="StartGame"/>
                 
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
                     <StackPanel Orientation="Vertical" Margin="0 0 30 0" HorizontalAlignment="Left">
@@ -177,127 +177,127 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="30 0 0 0" HorizontalAlignment="Right">
                         <TextBlock Text="Player Board:" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding PlayerBoard[0]}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding BB[0][0]}" HorizontalAlignment="Center"/>
                         <Grid RowDefinitions="*,*,*,*,*,*,*,*,*,*">
                             <Grid Grid.Row="0" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <ToggleButton Grid.Column="0" Content="{Binding PlayerBoard.value}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P00"/>
-                                <ToggleButton Grid.Column="1" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P01"/>
-                                <ToggleButton Grid.Column="2" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P02"/>
-                                <ToggleButton Grid.Column="3" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P03"/>
-                                <ToggleButton Grid.Column="4" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P04"/>
-                                <ToggleButton Grid.Column="5" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P05"/>
-                                <ToggleButton Grid.Column="6" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P06"/>
-                                <ToggleButton Grid.Column="7" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P07"/>
-                                <ToggleButton Grid.Column="8" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P08"/>
-                                <ToggleButton Grid.Column="9" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P09"/>
+                                <ToggleButton Grid.Column="0" Content="{Binding PB[0][0][0], Mode=OneWay}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P00"/>
+                                <ToggleButton Grid.Column="1" Content="{Binding PB[0][1]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P01"/>
+                                <ToggleButton Grid.Column="2" Content="{Binding PB[0][2]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P02"/>
+                                <ToggleButton Grid.Column="3" Content="{Binding PB[0][3]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P03"/>
+                                <ToggleButton Grid.Column="4" Content="{Binding PB[0][4]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P04"/>
+                                <ToggleButton Grid.Column="5" Content="{Binding PB[0][5]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P05"/>
+                                <ToggleButton Grid.Column="6" Content="{Binding PB[0][6]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P06"/>
+                                <ToggleButton Grid.Column="7" Content="{Binding PB[0][7]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P07"/>
+                                <ToggleButton Grid.Column="8" Content="{Binding PB[0][8]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P08"/>
+                                <ToggleButton Grid.Column="9" Content="{Binding PB[0][9]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P09"/>
                             </Grid>
                             <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <ToggleButton Grid.Column="0" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P10"/>
-                                <ToggleButton Grid.Column="1" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P11"/>
-                                <ToggleButton Grid.Column="2" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P12"/>
-                                <ToggleButton Grid.Column="3" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P13"/>
-                                <ToggleButton Grid.Column="4" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P14"/>
-                                <ToggleButton Grid.Column="5" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P15"/>
-                                <ToggleButton Grid.Column="6" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P16"/>
-                                <ToggleButton Grid.Column="7" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P17"/>
-                                <ToggleButton Grid.Column="8" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P18"/>
-                                <ToggleButton Grid.Column="9" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P19"/>
+                                <ToggleButton Grid.Column="0" Content="{Binding PB[1][0]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P10"/>
+                                <ToggleButton Grid.Column="1" Content="{Binding PB[1][1]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P11"/>
+                                <ToggleButton Grid.Column="2" Content="{Binding PB[1][2]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P12"/>
+                                <ToggleButton Grid.Column="3" Content="{Binding PB[1][3]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P13"/>
+                                <ToggleButton Grid.Column="4" Content="{Binding PB[1][4]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P14"/>
+                                <ToggleButton Grid.Column="5" Content="{Binding PB[1][5]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P15"/>
+                                <ToggleButton Grid.Column="6" Content="{Binding PB[1][6]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P16"/>
+                                <ToggleButton Grid.Column="7" Content="{Binding PB[1][7]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P17"/>
+                                <ToggleButton Grid.Column="8" Content="{Binding PB[1][8]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P18"/>
+                                <ToggleButton Grid.Column="9" Content="{Binding PB[1][9]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P19"/>
                             </Grid>
                             <Grid Grid.Row="2" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <ToggleButton Grid.Column="0" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P20"/>
-                                <ToggleButton Grid.Column="1" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P21"/>
-                                <ToggleButton Grid.Column="2" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P22"/>
-                                <ToggleButton Grid.Column="3" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P23"/>
-                                <ToggleButton Grid.Column="4" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P24"/>
-                                <ToggleButton Grid.Column="5" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P25"/>
-                                <ToggleButton Grid.Column="6" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P26"/>
-                                <ToggleButton Grid.Column="7" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P27"/>
-                                <ToggleButton Grid.Column="8" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P28"/>
-                                <ToggleButton Grid.Column="9" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P29"/>
+                                <ToggleButton Grid.Column="0" Content="{Binding PB[2][0]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P20"/>
+                                <ToggleButton Grid.Column="1" Content="{Binding PB[2][1]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P21"/>
+                                <ToggleButton Grid.Column="2" Content="{Binding PB[2][2]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P22"/>
+                                <ToggleButton Grid.Column="3" Content="{Binding PB[2][3]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P23"/>
+                                <ToggleButton Grid.Column="4" Content="{Binding PB[2][4]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P24"/>
+                                <ToggleButton Grid.Column="5" Content="{Binding PB[2][5]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P25"/>
+                                <ToggleButton Grid.Column="6" Content="{Binding PB[2][6]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P26"/>
+                                <ToggleButton Grid.Column="7" Content="{Binding PB[2][7]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P27"/>
+                                <ToggleButton Grid.Column="8" Content="{Binding PB[2][8]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P28"/>
+                                <ToggleButton Grid.Column="9" Content="{Binding PB[2][9]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P29"/>
                             </Grid>
                             <Grid Grid.Row="3" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <ToggleButton Grid.Column="0" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P30"/>
-                                <ToggleButton Grid.Column="1" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P31"/>
-                                <ToggleButton Grid.Column="2" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P32"/>
-                                <ToggleButton Grid.Column="3" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P33"/>
-                                <ToggleButton Grid.Column="4" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P34"/>
-                                <ToggleButton Grid.Column="5" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P35"/>
-                                <ToggleButton Grid.Column="6" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P36"/>
-                                <ToggleButton Grid.Column="7" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P37"/>
-                                <ToggleButton Grid.Column="8" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P38"/>
-                                <ToggleButton Grid.Column="9" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P39"/>
+                                <ToggleButton Grid.Column="0" Content="{Binding PB[3][0]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P30"/>
+                                <ToggleButton Grid.Column="1" Content="{Binding PB[3][1]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P31"/>
+                                <ToggleButton Grid.Column="2" Content="{Binding PB[3][2]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P32"/>
+                                <ToggleButton Grid.Column="3" Content="{Binding PB[3][3]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P33"/>
+                                <ToggleButton Grid.Column="4" Content="{Binding PB[3][4]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P34"/>
+                                <ToggleButton Grid.Column="5" Content="{Binding PB[3][5]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P35"/>
+                                <ToggleButton Grid.Column="6" Content="{Binding PB[3][6]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P36"/>
+                                <ToggleButton Grid.Column="7" Content="{Binding PB[3][7]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P37"/>
+                                <ToggleButton Grid.Column="8" Content="{Binding PB[3][8]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P38"/>
+                                <ToggleButton Grid.Column="9" Content="{Binding PB[3][9]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P39"/>
                             </Grid>
                             <Grid Grid.Row="4" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <ToggleButton Grid.Column="0" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P40" />
-                                <ToggleButton Grid.Column="1" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P41"/>
-                                <ToggleButton Grid.Column="2" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P42"/>
-                                <ToggleButton Grid.Column="3" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P43"/>
-                                <ToggleButton Grid.Column="4" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P44"/>
-                                <ToggleButton Grid.Column="5" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P45"/>
-                                <ToggleButton Grid.Column="6" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P46"/>
-                                <ToggleButton Grid.Column="7" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P47"/>
-                                <ToggleButton Grid.Column="8" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P48"/>
-                                <ToggleButton Grid.Column="9" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P49"/>
+                                <ToggleButton Grid.Column="0" Content="{Binding PB[4][0]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P40" />
+                                <ToggleButton Grid.Column="1" Content="{Binding PB[4][1]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P41"/>
+                                <ToggleButton Grid.Column="2" Content="{Binding PB[4][2]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P42"/>
+                                <ToggleButton Grid.Column="3" Content="{Binding PB[4][3]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P43"/>
+                                <ToggleButton Grid.Column="4" Content="{Binding PB[4][4]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P44"/>
+                                <ToggleButton Grid.Column="5" Content="{Binding PB[4][5]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P45"/>
+                                <ToggleButton Grid.Column="6" Content="{Binding PB[4][6]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P46"/>
+                                <ToggleButton Grid.Column="7" Content="{Binding PB[4][7]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P47"/>
+                                <ToggleButton Grid.Column="8" Content="{Binding PB[4][8]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P48"/>
+                                <ToggleButton Grid.Column="9" Content="{Binding PB[4][9]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P49"/>
                             </Grid>
                             <Grid Grid.Row="5" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <ToggleButton Grid.Column="0" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P50"/>
-                                <ToggleButton Grid.Column="1" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P51"/>
-                                <ToggleButton Grid.Column="2" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P52"/>
-                                <ToggleButton Grid.Column="3" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P53"/>
-                                <ToggleButton Grid.Column="4" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P54"/>
-                                <ToggleButton Grid.Column="5" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P55"/>
-                                <ToggleButton Grid.Column="6" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P56"/>
-                                <ToggleButton Grid.Column="7" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P57"/>
-                                <ToggleButton Grid.Column="8" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P58"/>
-                                <ToggleButton Grid.Column="9" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P59"/>
+                                <ToggleButton Grid.Column="0" Content="{Binding PB[5][0]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P50"/>
+                                <ToggleButton Grid.Column="1" Content="{Binding PB[5][1]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P51"/>
+                                <ToggleButton Grid.Column="2" Content="{Binding PB[5][2]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P52"/>
+                                <ToggleButton Grid.Column="3" Content="{Binding PB[5][3]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P53"/>
+                                <ToggleButton Grid.Column="4" Content="{Binding PB[5][4]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P54"/>
+                                <ToggleButton Grid.Column="5" Content="{Binding PB[5][5]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P55"/>
+                                <ToggleButton Grid.Column="6" Content="{Binding PB[5][6]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P56"/>
+                                <ToggleButton Grid.Column="7" Content="{Binding PB[5][7]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P57"/>
+                                <ToggleButton Grid.Column="8" Content="{Binding PB[5][8]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P58"/>
+                                <ToggleButton Grid.Column="9" Content="{Binding PB[5][9]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P59"/>
                             </Grid>
                             <Grid Grid.Row="6" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <ToggleButton Grid.Column="0" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P60"/>
-                                <ToggleButton Grid.Column="1" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P61"/>
-                                <ToggleButton Grid.Column="2" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P62"/>
-                                <ToggleButton Grid.Column="3" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P63"/>
-                                <ToggleButton Grid.Column="4" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P64"/>
-                                <ToggleButton Grid.Column="5" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P65"/>
-                                <ToggleButton Grid.Column="6" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P66"/>
-                                <ToggleButton Grid.Column="7" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P67"/>
-                                <ToggleButton Grid.Column="8" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P68"/>
-                                <ToggleButton Grid.Column="9" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P69"/>
+                                <ToggleButton Grid.Column="0" Content="{Binding PB[6][0]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P60"/>
+                                <ToggleButton Grid.Column="1" Content="{Binding PB[6][1]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P61"/>
+                                <ToggleButton Grid.Column="2" Content="{Binding PB[6][2]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P62"/>
+                                <ToggleButton Grid.Column="3" Content="{Binding PB[6][3]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P63"/>
+                                <ToggleButton Grid.Column="4" Content="{Binding PB[6][4]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P64"/>
+                                <ToggleButton Grid.Column="5" Content="{Binding PB[6][5]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P65"/>
+                                <ToggleButton Grid.Column="6" Content="{Binding PB[6][6]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P66"/>
+                                <ToggleButton Grid.Column="7" Content="{Binding PB[6][7]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P67"/>
+                                <ToggleButton Grid.Column="8" Content="{Binding PB[6][8]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P68"/>
+                                <ToggleButton Grid.Column="9" Content="{Binding PB[6][9]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P69"/>
                             </Grid>
                             <Grid Grid.Row="7" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <ToggleButton Grid.Column="0" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P70"/>
-                                <ToggleButton Grid.Column="1" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P71"/>
-                                <ToggleButton Grid.Column="2" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P72"/>
-                                <ToggleButton Grid.Column="3" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P73"/>
-                                <ToggleButton Grid.Column="4" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P74"/>
-                                <ToggleButton Grid.Column="5" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P75"/>
-                                <ToggleButton Grid.Column="6" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P76"/>
-                                <ToggleButton Grid.Column="7" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P77"/>
-                                <ToggleButton Grid.Column="8" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P78"/>
-                                <ToggleButton Grid.Column="9" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P79"/>
+                                <ToggleButton Grid.Column="0" Content="{Binding PB[7][0]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P70"/>
+                                <ToggleButton Grid.Column="1" Content="{Binding PB[7][1]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P71"/>
+                                <ToggleButton Grid.Column="2" Content="{Binding PB[7][2]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P72"/>
+                                <ToggleButton Grid.Column="3" Content="{Binding PB[7][3]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P73"/>
+                                <ToggleButton Grid.Column="4" Content="{Binding PB[7][4]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P74"/>
+                                <ToggleButton Grid.Column="5" Content="{Binding PB[7][5]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P75"/>
+                                <ToggleButton Grid.Column="6" Content="{Binding PB[7][6]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P76"/>
+                                <ToggleButton Grid.Column="7" Content="{Binding PB[7][7]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P77"/>
+                                <ToggleButton Grid.Column="8" Content="{Binding PB[7][8]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P78"/>
+                                <ToggleButton Grid.Column="9" Content="{Binding PB[7][9]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P79"/>
                             </Grid>
                             <Grid Grid.Row="8" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <ToggleButton Grid.Column="0" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P80"/>
-                                <ToggleButton Grid.Column="1" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P81"/>
-                                <ToggleButton Grid.Column="2" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P82"/>
-                                <ToggleButton Grid.Column="3" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P83"/>
-                                <ToggleButton Grid.Column="4" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P84"/>
-                                <ToggleButton Grid.Column="5" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P85"/>
-                                <ToggleButton Grid.Column="6" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P86"/>
-                                <ToggleButton Grid.Column="7" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P87"/>
-                                <ToggleButton Grid.Column="8" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P88"/>
-                                <ToggleButton Grid.Column="9" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P89"/>
+                                <ToggleButton Grid.Column="0" Content="{Binding PB[8][0]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P80"/>
+                                <ToggleButton Grid.Column="1" Content="{Binding PB[8][1]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P81"/>
+                                <ToggleButton Grid.Column="2" Content="{Binding PB[8][2]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P82"/>
+                                <ToggleButton Grid.Column="3" Content="{Binding PB[8][3]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P83"/>
+                                <ToggleButton Grid.Column="4" Content="{Binding PB[8][4]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P84"/>
+                                <ToggleButton Grid.Column="5" Content="{Binding PB[8][5]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P85"/>
+                                <ToggleButton Grid.Column="6" Content="{Binding PB[8][6]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P86"/>
+                                <ToggleButton Grid.Column="7" Content="{Binding PB[8][7]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P87"/>
+                                <ToggleButton Grid.Column="8" Content="{Binding PB[8][8]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P88"/>
+                                <ToggleButton Grid.Column="9" Content="{Binding PB[8][9]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P89"/>
                             </Grid>
                             <Grid Grid.Row="9" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <ToggleButton Grid.Column="0" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P90"/>
-                                <ToggleButton Grid.Column="1" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P91"/>
-                                <ToggleButton Grid.Column="2" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P92"/>
-                                <ToggleButton Grid.Column="3" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P93"/>
-                                <ToggleButton Grid.Column="4" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P94"/>
-                                <ToggleButton Grid.Column="5" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P95"/>
-                                <ToggleButton Grid.Column="6" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P96"/>
-                                <ToggleButton Grid.Column="7" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P97"/>
-                                <ToggleButton Grid.Column="8" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P98"/>
-                                <ToggleButton Grid.Column="9" Content="O" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P99"/>
+                                <ToggleButton Grid.Column="0" Content="{Binding PB[9][0]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P90"/>
+                                <ToggleButton Grid.Column="1" Content="{Binding PB[9][1]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P91"/>
+                                <ToggleButton Grid.Column="2" Content="{Binding PB[9][2]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P92"/>
+                                <ToggleButton Grid.Column="3" Content="{Binding PB[9][3]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P93"/>
+                                <ToggleButton Grid.Column="4" Content="{Binding PB[9][4]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P94"/>
+                                <ToggleButton Grid.Column="5" Content="{Binding PB[9][5]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P95"/>
+                                <ToggleButton Grid.Column="6" Content="{Binding PB[9][6]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P96"/>
+                                <ToggleButton Grid.Column="7" Content="{Binding PB[9][7]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P97"/>
+                                <ToggleButton Grid.Column="8" Content="{Binding PB[9][8]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P98"/>
+                                <ToggleButton Grid.Column="9" Content="{Binding PB[9][9]}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P99"/>
                             </Grid>
                         </Grid>
                     </StackPanel>

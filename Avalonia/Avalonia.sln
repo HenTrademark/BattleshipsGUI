@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleshipsGUI", "BattleshipsGUI\BattleshipsGUI.csproj", "{8BCEF99C-8E13-49E7-BD3E-A0BE5B3023C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{C9051350-BFD3-44D8-9F3B-634CD9CF24D4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,9 +12,5 @@ Global
 		{8BCEF99C-8E13-49E7-BD3E-A0BE5B3023C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BCEF99C-8E13-49E7-BD3E-A0BE5B3023C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BCEF99C-8E13-49E7-BD3E-A0BE5B3023C4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C9051350-BFD3-44D8-9F3B-634CD9CF24D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C9051350-BFD3-44D8-9F3B-634CD9CF24D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C9051350-BFD3-44D8-9F3B-634CD9CF24D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C9051350-BFD3-44D8-9F3B-634CD9CF24D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

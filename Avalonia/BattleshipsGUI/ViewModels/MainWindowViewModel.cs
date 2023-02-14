@@ -15,19 +15,7 @@ using ReactiveUI;
 namespace BattleshipsGUI.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase {
-    public static string?[,] Board = { 
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" }, 
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" } 
-    };
-
+    
     private bool _right;
     public bool Right {
         get => _right;
@@ -96,29 +84,20 @@ public class MainWindowViewModel : ViewModelBase {
 
     private int _boardCount;
     public void MakeTheBoard() {
-        _boardCount = Battleships.MakeBoard(Battleships.Bot, _count);
+        _boardCount = Battleships.MakeBoard(BotBoard, _count);
+        BB = BotBoard;
     }
     
     private int _botCount;
     public void MakePlayerBoard() {
         _botCount = Battleships.MakeBoard(PlayerBoard, _count);
-        Board = PlayerBoard;
+        PB = PlayerBoard;
     }
     
-    public string GetName(string name) {
-        int row = int.Parse(name[1].ToString());
-        int col = int.Parse(name[2].ToString());
-
-        string? plot = Battleships.Bot[row, col];
-        return plot == "O" ? "X" : plot![0].ToString();
-    }
-    
-    public string GetPlayerName(string name) {
-        int row = int.Parse(name[1].ToString());
-        int col = int.Parse(name[2].ToString());
-
-        string? plot = PlayerBoard[row, col];
-        return plot == "O" ? "X" : plot![0].ToString();
+    private void StartTheGame() {
+        BoardValues();
+        MakeTheBoard();
+        MakePlayerBoard();
     }
 
     public void SinkShip() {
@@ -128,69 +107,94 @@ public class MainWindowViewModel : ViewModelBase {
         col = 0;
         
 
-        PB[row,col] = "Haha";
+        PB[row][col] = "Haha";
     }
     
-    private string?[,] PB {
+    public string[][] PB {
         get => PlayerBoard;
         set {
             this.RaiseAndSetIfChanged(ref PlayerBoard, value);
             for (int row = 0; row < 10; row++) {
                 for (int col = 0; col < 10; col++) {
-                    File.WriteAllText("./Board/P" + row.ToString() + col.ToString(),PlayerBoard[row,col] ?? "".ToString());
+                    File.WriteAllText("./Board/P" + row.ToString() + col.ToString(),PlayerBoard[row][col]);
+                }
+            }
+        }
+    }
+    
+    public string[][] BB {
+        get => BotBoard;
+        set {
+            this.RaiseAndSetIfChanged(ref PlayerBoard, value);
+            for (int row = 0; row < 10; row++) {
+                for (int col = 0; col < 10; col++) {
+                    File.WriteAllText("./Board/B" + row.ToString() + col.ToString(),BotBoard[row][col]);
                 }
             }
         }
     }
 
     public void Clicked() {
-        PB[0, 0] = "Haha";
+        BB[0][0] = "Haha";
     }
 
-    public string?[,] PlayerBoard = { 
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" }, 
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" } 
+    public string[][] PlayerBoard = { 
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" }, 
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" } 
+    };
+    
+    public string[][] BotBoard = { 
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" }, 
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" } 
     };
 }
 
 class Battleships {
     private static Random _rand = new();
     
-    public static string?[,] Bot = { 
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" }, 
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" } 
+    public static string[][] Bot = { 
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" }, 
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" } 
     };
     
-    public static string?[,] Player = { 
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" }, 
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" } 
+    public static string[][] Player = { 
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" }, 
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
+        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" } 
     };
 
-    public static int MakeBoard(string?[,] board,int[] count) {
+    public static int MakeBoard(string[][] board, int[] count) {
             bool validplace;
             int plots = 0;
 
@@ -203,56 +207,56 @@ class Battleships {
 
                     switch (direction) {
                         case 0: // Up
-                            if (row < 4 || board[row,col] != "O" || board[row - 1,col] != "O" ||
-                                board[row - 2,col] != "O" || board[row - 3,col] != "O" || board[row - 4,col] != "O") {
+                            if (row < 4 || board[row][col] != "O" || board[row - 1][col] != "O" ||
+                                board[row - 2][col] != "O" || board[row - 3][col] != "O" || board[row - 4][col] != "O") {
                                 break;
                             }
 
                             validplace = true;
-                            board[row,col] = "Carrier" + x.ToString();
-                            board[row - 1,col] = "Carrier" + x.ToString();
-                            board[row - 2,col] = "Carrier" + x.ToString();
-                            board[row - 3,col] = "Carrier" + x.ToString();
-                            board[row - 4,col] = "Carrier" + x.ToString();
+                            board[row][col] = "Carrier" + x.ToString();
+                            board[row - 1][col] = "Carrier" + x.ToString();
+                            board[row - 2][col] = "Carrier" + x.ToString();
+                            board[row - 3][col] = "Carrier" + x.ToString();
+                            board[row - 4][col] = "Carrier" + x.ToString();
                             break;
                         case 1: // Right
-                            if (col > 5 || board[row,col] != "O" || board[row,col + 1] != "O" ||
-                                board[row,col + 2] != "O" || board[row,col + 3] != "O" || board[row,col + 4] != "O") {
+                            if (col > 5 || board[row][col] != "O" || board[row][col + 1] != "O" ||
+                                board[row][col + 2] != "O" || board[row][col + 3] != "O" || board[row][col + 4] != "O") {
                                 break;
                             }
 
                             validplace = true;
-                            board[row,col] = "Carrier" + x.ToString();
-                            board[row,col + 1] = "Carrier" + x.ToString();
-                            board[row,col + 2] = "Carrier" + x.ToString();
-                            board[row,col + 3] = "Carrier" + x.ToString();
-                            board[row,col + 4] = "Carrier" + x.ToString();
+                            board[row][col] = "Carrier" + x.ToString();
+                            board[row][col + 1] = "Carrier" + x.ToString();
+                            board[row][col + 2] = "Carrier" + x.ToString();
+                            board[row][col + 3] = "Carrier" + x.ToString();
+                            board[row][col + 4] = "Carrier" + x.ToString();
                             break;
                         case 2: // Down
-                            if (row > 5 || board[row,col] != "O" || board[row + 1,col] != "O" ||
-                                board[row + 2,col] != "O" || board[row + 3,col] != "O" || board[row + 4,col] != "O") {
+                            if (row > 5 || board[row][col] != "O" || board[row + 1][col] != "O" ||
+                                board[row + 2][col] != "O" || board[row + 3][col] != "O" || board[row + 4][col] != "O") {
                                 break;
                             }
 
                             validplace = true;
-                            board[row,col] = "Carrier" + x.ToString();
-                            board[row + 1,col] = "Carrier" + x.ToString();
-                            board[row + 2,col] = "Carrier" + x.ToString();
-                            board[row + 3,col] = "Carrier" + x.ToString();
-                            board[row + 4,col] = "Carrier" + x.ToString();
+                            board[row][col] = "Carrier" + x.ToString();
+                            board[row + 1][col] = "Carrier" + x.ToString();
+                            board[row + 2][col] = "Carrier" + x.ToString();
+                            board[row + 3][col] = "Carrier" + x.ToString();
+                            board[row + 4][col] = "Carrier" + x.ToString();
                             break;
                         case 3: // Left
-                            if (col < 4 || board[row,col] != "O" || board[row,col - 1] != "O" ||
-                                board[row,col - 2] != "O" || board[row,col - 3] != "O" || board[row,col - 4] != "O") {
+                            if (col < 4 || board[row][col] != "O" || board[row][col - 1] != "O" ||
+                                board[row][col - 2] != "O" || board[row][col - 3] != "O" || board[row][col - 4] != "O") {
                                 break;
                             }
 
                             validplace = true;
-                            board[row,col] = "Carrier" + x.ToString();
-                            board[row,col - 1] = "Carrier" + x.ToString();
-                            board[row,col - 2] = "Carrier" + x.ToString();
-                            board[row,col - 3] = "Carrier" + x.ToString();
-                            board[row,col - 4] = "Carrier" + x.ToString();
+                            board[row][col] = "Carrier" + x.ToString();
+                            board[row][col - 1] = "Carrier" + x.ToString();
+                            board[row][col - 2] = "Carrier" + x.ToString();
+                            board[row][col - 3] = "Carrier" + x.ToString();
+                            board[row][col - 4] = "Carrier" + x.ToString();
                             break;
                     }
                 }
@@ -268,52 +272,52 @@ class Battleships {
 
                     switch (direction) {
                         case 0: // Up
-                            if (row < 3 || board[row,col] != "O" || board[row - 1,col] != "O" ||
-                                board[row - 2,col] != "O" || board[row - 3,col] != "O") {
+                            if (row < 3 || board[row][col] != "O" || board[row - 1][col] != "O" ||
+                                board[row - 2][col] != "O" || board[row - 3][col] != "O") {
                                 break;
                             }
 
                             validplace = true;
-                            board[row,col] = "Destroyer" + x.ToString();
-                            board[row - 1,col] = "Destroyer" + x.ToString();
-                            board[row - 2,col] = "Destroyer" + x.ToString();
-                            board[row - 3,col] = "Destroyer" + x.ToString();
+                            board[row][col] = "Destroyer" + x.ToString();
+                            board[row - 1][col] = "Destroyer" + x.ToString();
+                            board[row - 2][col] = "Destroyer" + x.ToString();
+                            board[row - 3][col] = "Destroyer" + x.ToString();
                             break;
                         case 1: // Right
-                            if (col > 6 || board[row,col] != "O" || board[row,col + 1] != "O" ||
-                                board[row,col + 2] != "O" || board[row,col + 3] != "O") {
+                            if (col > 6 || board[row][col] != "O" || board[row][col + 1] != "O" ||
+                                board[row][col + 2] != "O" || board[row][col + 3] != "O") {
                                 break;
                             }
 
                             validplace = true;
-                            board[row,col] = "Destroyer" + x.ToString();
-                            board[row,col + 1] = "Destroyer" + x.ToString();
-                            board[row,col + 2] = "Destroyer" + x.ToString();
-                            board[row,col + 3] = "Destroyer" + x.ToString();
+                            board[row][col] = "Destroyer" + x.ToString();
+                            board[row][col + 1] = "Destroyer" + x.ToString();
+                            board[row][col + 2] = "Destroyer" + x.ToString();
+                            board[row][col + 3] = "Destroyer" + x.ToString();
                             break;
                         case 2: // Down
-                            if (row > 6 || board[row,col] != "O" || board[row + 1,col] != "O" ||
-                                board[row + 2,col] != "O" || board[row + 3,col] != "O") {
+                            if (row > 6 || board[row][col] != "O" || board[row + 1][col] != "O" ||
+                                board[row + 2][col] != "O" || board[row + 3][col] != "O") {
                                 break;
                             }
 
                             validplace = true;
-                            board[row,col] = "Destroyer" + x.ToString();
-                            board[row + 1,col] = "Destroyer" + x.ToString();
-                            board[row + 2,col] = "Destroyer" + x.ToString();
-                            board[row + 3,col] = "Destroyer" + x.ToString();
+                            board[row][col] = "Destroyer" + x.ToString();
+                            board[row + 1][col] = "Destroyer" + x.ToString();
+                            board[row + 2][col] = "Destroyer" + x.ToString();
+                            board[row + 3][col] = "Destroyer" + x.ToString();
                             break;
                         case 3: // Left
-                            if (col < 3 || board[row,col] != "O" || board[row,col - 1] != "O" ||
-                                board[row,col - 2] != "O" || board[row,col - 3] != "O") {
+                            if (col < 3 || board[row][col] != "O" || board[row][col - 1] != "O" ||
+                                board[row][col - 2] != "O" || board[row][col - 3] != "O") {
                                 break;
                             }
 
                             validplace = true;
-                            board[row,col] = "Destroyer" + x.ToString();
-                            board[row,col - 1] = "Destroyer" + x.ToString();
-                            board[row,col - 2] = "Destroyer" + x.ToString();
-                            board[row,col - 3] = "Destroyer" + x.ToString();
+                            board[row][col] = "Destroyer" + x.ToString();
+                            board[row][col - 1] = "Destroyer" + x.ToString();
+                            board[row][col - 2] = "Destroyer" + x.ToString();
+                            board[row][col - 3] = "Destroyer" + x.ToString();
                             break;
                     }
                 }
@@ -329,48 +333,48 @@ class Battleships {
 
                     switch (direction) {
                         case 0: // Up
-                            if (row < 2 || board[row,col] != "O" || board[row - 1,col] != "O" ||
-                                board[row - 2,col] != "O") {
+                            if (row < 2 || board[row][col] != "O" || board[row - 1][col] != "O" ||
+                                board[row - 2][col] != "O") {
                                 break;
                             }
 
                             validplace = true;
-                            board[row,col] = "Ship" + x.ToString();
-                            board[row - 1,col] = "Ship" + x.ToString();
-                            board[row - 2,col] = "Ship" + x.ToString();
+                            board[row][col] = "Ship" + x.ToString();
+                            board[row - 1][col] = "Ship" + x.ToString();
+                            board[row - 2][col] = "Ship" + x.ToString();
                             break;
                         case 1: // Right
-                            if (col > 7 || board[row,col] != "O" || board[row,col + 1] != "O" ||
-                                board[row,col + 2] != "O") {
+                            if (col > 7 || board[row][col] != "O" || board[row][col + 1] != "O" ||
+                                board[row][col + 2] != "O") {
                                 break;
                             }
 
                             validplace = true;
-                            board[row,col] = "Ship" + x.ToString();
-                            board[row,col + 1] = "Ship" + x.ToString();
-                            board[row,col + 2] = "Ship" + x.ToString();
+                            board[row][col] = "Ship" + x.ToString();
+                            board[row][col + 1] = "Ship" + x.ToString();
+                            board[row][col + 2] = "Ship" + x.ToString();
                             break;
                         case 2: // Down
-                            if (row > 7 || board[row,col] != "O" || board[row + 1,col] != "O" ||
-                                board[row + 2,col] != "O") {
+                            if (row > 7 || board[row][col] != "O" || board[row + 1][col] != "O" ||
+                                board[row + 2][col] != "O") {
                                 break;
                             }
 
                             validplace = true;
-                            board[row,col] = "Ship" + x.ToString();
-                            board[row + 1,col] = "Ship" + x.ToString();
-                            board[row + 2,col] = "Ship" + x.ToString();
+                            board[row][col] = "Ship" + x.ToString();
+                            board[row + 1][col] = "Ship" + x.ToString();
+                            board[row + 2][col] = "Ship" + x.ToString();
                             break;
                         case 3: // Left
-                            if (col < 2 || board[row,col] != "O" || board[row,col - 1] != "O" ||
-                                board[row,col - 2] != "O") {
+                            if (col < 2 || board[row][col] != "O" || board[row][col - 1] != "O" ||
+                                board[row][col - 2] != "O") {
                                 break;
                             }
 
                             validplace = true;
-                            board[row,col] = "Ship" + x.ToString();
-                            board[row,col - 1] = "Ship" + x.ToString();
-                            board[row,col - 2] = "Ship" + x.ToString();
+                            board[row][col] = "Ship" + x.ToString();
+                            board[row][col - 1] = "Ship" + x.ToString();
+                            board[row][col - 2] = "Ship" + x.ToString();
                             break;
                     }
                 }
@@ -386,40 +390,40 @@ class Battleships {
 
                     switch (direction) {
                         case 0: // Up
-                            if (row < 1 || board[row,col] != "O" || board[row - 1,col] != "O") {
+                            if (row < 1 || board[row][col] != "O" || board[row - 1][col] != "O") {
                                 break;
                             }
 
                             validplace = true;
-                            board[row,col] = "Patrol" + x.ToString();
-                            board[row - 1,col] = "Patrol" + x.ToString();
+                            board[row][col] = "Patrol" + x.ToString();
+                            board[row - 1][col] = "Patrol" + x.ToString();
                             break;
                         case 1: // Right
-                            if (col > 8 || board[row,col] != "O" || board[row,col + 1] != "O") {
+                            if (col > 8 || board[row][col] != "O" || board[row][col + 1] != "O") {
                                 break;
                             }
 
                             validplace = true;
-                            board[row,col] = "Patrol" + x.ToString();
-                            board[row,col + 1] = "Patrol" + x.ToString();
+                            board[row][col] = "Patrol" + x.ToString();
+                            board[row][col + 1] = "Patrol" + x.ToString();
                             break;
                         case 2: // Down
-                            if (row > 8 || board[row,col] != "O" || board[row + 1,col] != "O") {
+                            if (row > 8 || board[row][col] != "O" || board[row + 1][col] != "O") {
                                 break;
                             }
 
                             validplace = true;
-                            board[row,col] = "Patrol" + x.ToString();
-                            board[row + 1,col] = "Patrol" + x.ToString();
+                            board[row][col] = "Patrol" + x.ToString();
+                            board[row + 1][col] = "Patrol" + x.ToString();
                             break;
                         case 3: // Left
-                            if (col < 1 || board[row,col] != "O" || board[row,col - 1] != "O") {
+                            if (col < 1 || board[row][col] != "O" || board[row][col - 1] != "O") {
                                 break;
                             }
 
                             validplace = true;
-                            board[row,col] = "Patrol" + x.ToString();
-                            board[row,col - 1] = "Patrol" + x.ToString();
+                            board[row][col] = "Patrol" + x.ToString();
+                            board[row][col - 1] = "Patrol" + x.ToString();
                             break;
                     }
                 }

@@ -23,6 +23,11 @@ public partial class GameplayView : UserControl {
                 File.WriteAllText("./Board/P" + a.ToString() + b.ToString() + ".txt","O");
             }
         }
+        for (int a = 0; a < 10; a++) {
+            for (int b = 0; b < 10; b++) {
+                File.WriteAllText("./Board/B" + a.ToString() + b.ToString() + ".txt","O");
+            }
+        }
         InitializeComponent();
     }
 
@@ -30,20 +35,19 @@ public partial class GameplayView : UserControl {
         AvaloniaXamlLoader.Load(this);
     }
     
-    private void ButtonOnClick(object? o, RoutedEventArgs e) {
-        ((Button)o).Content = _mwvm.GetName(((Button)o).Name);
-        _mwvm.SinkShip();
-        ((Button)o).IsEnabled = false;
-    }
     private void StartTheGame(object? o, RoutedEventArgs e) {
-        _mwvm.BoardValues();
-        _mwvm.MakeTheBoard();
-        _mwvm.MakePlayerBoard();
         ((Button)o!).IsEnabled = false;
+    }
+    
+    private void ButtonOnClick(object? o, RoutedEventArgs e) {
+        string name = File.ReadAllText("./Board/P" + ((Button)o).Name[1] + ((Button)o).Name[2]);
+        name = name == "O" ? "X" : name;
+        ((Button)o).Content = name[0];
+        ((Button)o).IsEnabled = false;
     }
 
     private void ButtonChecked(object? o, RoutedEventArgs e) {
-        ((Button)o).Content = _mwvm.GetPlayerName(((Button)o).Name);
+        
     }
 
     private void BeingInitialised(object? o, EventArgs e) {
