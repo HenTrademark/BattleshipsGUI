@@ -20,7 +20,6 @@
         
         <Panel Margin="10">
             <StackPanel>
-                <TextBlock Text="{Binding Name^.Length}"></TextBlock>
                 <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto,Auto" Margin="5" IsVisible="{Binding #StartGame.IsEnabled}">
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Carriers (5 squares):" HorizontalAlignment="Center"/>
                     <ComboBox Grid.Row="1" Grid.Column="0" PlaceholderText="Choose for me" HorizontalAlignment="Center" SelectedIndex="{Binding Carriers, Mode=OneWayToSource}">
@@ -54,130 +53,129 @@
                         <TextBlock Text="Enemy Board:" HorizontalAlignment="Center"/>
                         <Grid RowDefinitions="*,*,*,*,*,*,*,*,*,*">
                             <Grid Grid.Row="0" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <Button Grid.Column="0" Content="O" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B00"/>
-                                <Button Grid.Column="1" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B01"/>
-                                <Button Grid.Column="2" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B02"/>
-                                <Button Grid.Column="3" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B03"/>
-                                <Button Grid.Column="4" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B04"/>
-                                <Button Grid.Column="5" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B05"/>
-                                <Button Grid.Column="6" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B06"/>
-                                <Button Grid.Column="7" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B07"/>
-                                <Button Grid.Column="8" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B08"/>
-                                <Button Grid.Column="9" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B09"/>
+                                <Button Grid.Column="0" Content="O" CommandParameter="B00" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B00"/>
+                                <Button Grid.Column="1" Content="O" CommandParameter="B01" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B01"/>
+                                <Button Grid.Column="2" Content="O" CommandParameter="B02" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B02"/>
+                                <Button Grid.Column="3" Content="O" CommandParameter="B03" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B03"/>
+                                <Button Grid.Column="4" Content="O" CommandParameter="B04" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B04"/>
+                                <Button Grid.Column="5" Content="O" CommandParameter="B05" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B05"/>
+                                <Button Grid.Column="6" Content="O" CommandParameter="B06" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B06"/>
+                                <Button Grid.Column="7" Content="O" CommandParameter="B07" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B07"/>
+                                <Button Grid.Column="8" Content="O" CommandParameter="B08" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B08"/>
+                                <Button Grid.Column="9" Content="O" CommandParameter="B09" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B09"/>
                             </Grid>
                             <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <Button Grid.Column="0" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B10"/>
-                                <Button Grid.Column="1" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B11"/>
-                                <Button Grid.Column="2" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B12"/>
-                                <Button Grid.Column="3" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B13"/>
-                                <Button Grid.Column="4" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B14"/>
-                                <Button Grid.Column="5" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B15"/>
-                                <Button Grid.Column="6" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B16"/>
-                                <Button Grid.Column="7" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B17"/>
-                                <Button Grid.Column="8" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B18"/>
-                                <Button Grid.Column="9" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B19"/>
+                                <Button Grid.Column="0" Content="O" CommandParameter="B10" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B10"/>
+                                <Button Grid.Column="1" Content="O" CommandParameter="B11" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B11"/>
+                                <Button Grid.Column="2" Content="O" CommandParameter="B12" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B12"/>
+                                <Button Grid.Column="3" Content="O" CommandParameter="B13" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B13"/>
+                                <Button Grid.Column="4" Content="O" CommandParameter="B14" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B14"/>
+                                <Button Grid.Column="5" Content="O" CommandParameter="B15" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B15"/>
+                                <Button Grid.Column="6" Content="O" CommandParameter="B16" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B16"/>
+                                <Button Grid.Column="7" Content="O" CommandParameter="B17" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B17"/>
+                                <Button Grid.Column="8" Content="O" CommandParameter="B18" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B18"/>
+                                <Button Grid.Column="9" Content="O" CommandParameter="B19" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B19"/>
                             </Grid>
                             <Grid Grid.Row="2" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <Button Grid.Column="0" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B20"/>
-                                <Button Grid.Column="1" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B21"/>
-                                <Button Grid.Column="2" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B22"/>
-                                <Button Grid.Column="3" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B23"/>
-                                <Button Grid.Column="4" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B24"/>
-                                <Button Grid.Column="5" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B25"/>
-                                <Button Grid.Column="6" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B26"/>
-                                <Button Grid.Column="7" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B27"/>
-                                <Button Grid.Column="8" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B28"/>
-                                <Button Grid.Column="9" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B29"/>
+                                <Button Grid.Column="0" Content="O" CommandParameter="B20" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B20"/>
+                                <Button Grid.Column="1" Content="O" CommandParameter="B21" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B21"/>
+                                <Button Grid.Column="2" Content="O" CommandParameter="B22" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B22"/>
+                                <Button Grid.Column="3" Content="O" CommandParameter="B23" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B23"/>
+                                <Button Grid.Column="4" Content="O" CommandParameter="B24" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B24"/>
+                                <Button Grid.Column="5" Content="O" CommandParameter="B25" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B25"/>
+                                <Button Grid.Column="6" Content="O" CommandParameter="B26" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B26"/>
+                                <Button Grid.Column="7" Content="O" CommandParameter="B27" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B27"/>
+                                <Button Grid.Column="8" Content="O" CommandParameter="B28" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B28"/>
+                                <Button Grid.Column="9" Content="O" CommandParameter="B29" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B29"/>
                             </Grid>
                             <Grid Grid.Row="3" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <Button Grid.Column="0" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B30"/>
-                                <Button Grid.Column="1" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B31"/>
-                                <Button Grid.Column="2" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B32"/>
-                                <Button Grid.Column="3" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B33"/>
-                                <Button Grid.Column="4" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B34"/>
-                                <Button Grid.Column="5" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B35"/>
-                                <Button Grid.Column="6" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B36"/>
-                                <Button Grid.Column="7" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B37"/>
-                                <Button Grid.Column="8" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B38"/>
-                                <Button Grid.Column="9" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B39"/>
+                                <Button Grid.Column="0" Content="O" CommandParameter="B30" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B30"/>
+                                <Button Grid.Column="1" Content="O" CommandParameter="B31" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B31"/>
+                                <Button Grid.Column="2" Content="O" CommandParameter="B32" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B32"/>
+                                <Button Grid.Column="3" Content="O" CommandParameter="B33" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B33"/>
+                                <Button Grid.Column="4" Content="O" CommandParameter="B34" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B34"/>
+                                <Button Grid.Column="5" Content="O" CommandParameter="B35" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B35"/>
+                                <Button Grid.Column="6" Content="O" CommandParameter="B36" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B36"/>
+                                <Button Grid.Column="7" Content="O" CommandParameter="B37" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B37"/>
+                                <Button Grid.Column="8" Content="O" CommandParameter="B38" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B38"/>
+                                <Button Grid.Column="9" Content="O" CommandParameter="B39" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B39"/>
                             </Grid>
                             <Grid Grid.Row="4" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <Button Grid.Column="0" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B40" />
-                                <Button Grid.Column="1" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B41"/>
-                                <Button Grid.Column="2" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B42"/>
-                                <Button Grid.Column="3" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B43"/>
-                                <Button Grid.Column="4" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B44"/>
-                                <Button Grid.Column="5" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B45"/>
-                                <Button Grid.Column="6" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B46"/>
-                                <Button Grid.Column="7" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B47"/>
-                                <Button Grid.Column="8" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B48"/>
-                                <Button Grid.Column="9" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B49"/>
+                                <Button Grid.Column="0" Content="O" CommandParameter="B40" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B40" />
+                                <Button Grid.Column="1" Content="O" CommandParameter="B41" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B41"/>
+                                <Button Grid.Column="2" Content="O" CommandParameter="B42" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B42"/>
+                                <Button Grid.Column="3" Content="O" CommandParameter="B43" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B43"/>
+                                <Button Grid.Column="4" Content="O" CommandParameter="B44" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B44"/>
+                                <Button Grid.Column="5" Content="O" CommandParameter="B45" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B45"/>
+                                <Button Grid.Column="6" Content="O" CommandParameter="B46" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B46"/>
+                                <Button Grid.Column="7" Content="O" CommandParameter="B47" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B47"/>
+                                <Button Grid.Column="8" Content="O" CommandParameter="B48" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B48"/>
+                                <Button Grid.Column="9" Content="O" CommandParameter="B49" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B49"/>
                             </Grid>
                             <Grid Grid.Row="5" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <Button Grid.Column="0" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B50"/>
-                                <Button Grid.Column="1" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B51"/>
-                                <Button Grid.Column="2" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B52"/>
-                                <Button Grid.Column="3" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B53"/>
-                                <Button Grid.Column="4" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B54"/>
-                                <Button Grid.Column="5" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B55"/>
-                                <Button Grid.Column="6" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B56"/>
-                                <Button Grid.Column="7" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B57"/>
-                                <Button Grid.Column="8" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B58"/>
-                                <Button Grid.Column="9" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B59"/>
+                                <Button Grid.Column="0" Content="O" CommandParameter="B50" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B50"/>
+                                <Button Grid.Column="1" Content="O" CommandParameter="B51" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B51"/>
+                                <Button Grid.Column="2" Content="O" CommandParameter="B52" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B52"/>
+                                <Button Grid.Column="3" Content="O" CommandParameter="B53" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B53"/>
+                                <Button Grid.Column="4" Content="O" CommandParameter="B54" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B54"/>
+                                <Button Grid.Column="5" Content="O" CommandParameter="B55" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B55"/>
+                                <Button Grid.Column="6" Content="O" CommandParameter="B56" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B56"/>
+                                <Button Grid.Column="7" Content="O" CommandParameter="B57" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B57"/>
+                                <Button Grid.Column="8" Content="O" CommandParameter="B58" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B58"/>
+                                <Button Grid.Column="9" Content="O" CommandParameter="B59" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B59"/>
                             </Grid>
                             <Grid Grid.Row="6" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <Button Grid.Column="0" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B60"/>
-                                <Button Grid.Column="1" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B61"/>
-                                <Button Grid.Column="2" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B62"/>
-                                <Button Grid.Column="3" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B63"/>
-                                <Button Grid.Column="4" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B64"/>
-                                <Button Grid.Column="5" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B65"/>
-                                <Button Grid.Column="6" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B66"/>
-                                <Button Grid.Column="7" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B67"/>
-                                <Button Grid.Column="8" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B68"/>
-                                <Button Grid.Column="9" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B69"/>
+                                <Button Grid.Column="0" Content="O" CommandParameter="B60" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B60"/>
+                                <Button Grid.Column="1" Content="O" CommandParameter="B61" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B61"/>
+                                <Button Grid.Column="2" Content="O" CommandParameter="B62" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B62"/>
+                                <Button Grid.Column="3" Content="O" CommandParameter="B63" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B63"/>
+                                <Button Grid.Column="4" Content="O" CommandParameter="B64" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B64"/>
+                                <Button Grid.Column="5" Content="O" CommandParameter="B65" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B65"/>
+                                <Button Grid.Column="6" Content="O" CommandParameter="B66" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B66"/>
+                                <Button Grid.Column="7" Content="O" CommandParameter="B67" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B67"/>
+                                <Button Grid.Column="8" Content="O" CommandParameter="B68" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B68"/>
+                                <Button Grid.Column="9" Content="O" CommandParameter="B69" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B69"/>
                             </Grid>
                             <Grid Grid.Row="7" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <Button Grid.Column="0" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B70"/>
-                                <Button Grid.Column="1" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B71"/>
-                                <Button Grid.Column="2" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B72"/>
-                                <Button Grid.Column="3" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B73"/>
-                                <Button Grid.Column="4" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B74"/>
-                                <Button Grid.Column="5" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B75"/>
-                                <Button Grid.Column="6" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B76"/>
-                                <Button Grid.Column="7" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B77"/>
-                                <Button Grid.Column="8" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B78"/>
-                                <Button Grid.Column="9" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B79"/>
+                                <Button Grid.Column="0" Content="O" CommandParameter="B70" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B70"/>
+                                <Button Grid.Column="1" Content="O" CommandParameter="B71" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B71"/>
+                                <Button Grid.Column="2" Content="O" CommandParameter="B72" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B72"/>
+                                <Button Grid.Column="3" Content="O" CommandParameter="B73" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B73"/>
+                                <Button Grid.Column="4" Content="O" CommandParameter="B74" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B74"/>
+                                <Button Grid.Column="5" Content="O" CommandParameter="B75" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B75"/>
+                                <Button Grid.Column="6" Content="O" CommandParameter="B76" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B76"/>
+                                <Button Grid.Column="7" Content="O" CommandParameter="B77" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B77"/>
+                                <Button Grid.Column="8" Content="O" CommandParameter="B78" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B78"/>
+                                <Button Grid.Column="9" Content="O" CommandParameter="B79" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B79"/>
                             </Grid>
                             <Grid Grid.Row="8" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <Button Grid.Column="0" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B80"/>
-                                <Button Grid.Column="1" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B81"/>
-                                <Button Grid.Column="2" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B82"/>
-                                <Button Grid.Column="3" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B83"/>
-                                <Button Grid.Column="4" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B84"/>
-                                <Button Grid.Column="5" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B85"/>
-                                <Button Grid.Column="6" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B86"/>
-                                <Button Grid.Column="7" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B87"/>
-                                <Button Grid.Column="8" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B88"/>
-                                <Button Grid.Column="9" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B89"/>
+                                <Button Grid.Column="0" Content="O" CommandParameter="B80" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B80"/>
+                                <Button Grid.Column="1" Content="O" CommandParameter="B81" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B81"/>
+                                <Button Grid.Column="2" Content="O" CommandParameter="B82" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B82"/>
+                                <Button Grid.Column="3" Content="O" CommandParameter="B83" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B83"/>
+                                <Button Grid.Column="4" Content="O" CommandParameter="B84" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B84"/>
+                                <Button Grid.Column="5" Content="O" CommandParameter="B85" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B85"/>
+                                <Button Grid.Column="6" Content="O" CommandParameter="B86" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B86"/>
+                                <Button Grid.Column="7" Content="O" CommandParameter="B87" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B87"/>
+                                <Button Grid.Column="8" Content="O" CommandParameter="B88" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B88"/>
+                                <Button Grid.Column="9" Content="O" CommandParameter="B89" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B89"/>
                             </Grid>
                             <Grid Grid.Row="9" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
-                                <Button Grid.Column="0" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B90"/>
-                                <Button Grid.Column="1" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B91"/>
-                                <Button Grid.Column="2" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B92"/>
-                                <Button Grid.Column="3" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B93"/>
-                                <Button Grid.Column="4" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B94"/>
-                                <Button Grid.Column="5" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B95"/>
-                                <Button Grid.Column="6" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B96"/>
-                                <Button Grid.Column="7" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B97"/>
-                                <Button Grid.Column="8" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B98"/>
-                                <Button Grid.Column="9" Content="O" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B99"/>
+                                <Button Grid.Column="0" Content="O" CommandParameter="B90" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B90"/>
+                                <Button Grid.Column="1" Content="O" CommandParameter="B91" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B91"/>
+                                <Button Grid.Column="2" Content="O" CommandParameter="B92" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B92"/>
+                                <Button Grid.Column="3" Content="O" CommandParameter="B93" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B93"/>
+                                <Button Grid.Column="4" Content="O" CommandParameter="B94" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B94"/>
+                                <Button Grid.Column="5" Content="O" CommandParameter="B95" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B95"/>
+                                <Button Grid.Column="6" Content="O" CommandParameter="B96" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B96"/>
+                                <Button Grid.Column="7" Content="O" CommandParameter="B97" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B97"/>
+                                <Button Grid.Column="8" Content="O" CommandParameter="B98" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B98"/>
+                                <Button Grid.Column="9" Content="O" CommandParameter="B99" Command="{Binding Clicked}" Margin="5" Click="ButtonOnClick" IsEnabled="{Binding !#StartGame.IsEnabled}" Name="B99"/>
                             </Grid>
                         </Grid>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="30 0 0 0" HorizontalAlignment="Right">
                         <TextBlock Text="Player Board:" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding BB[0][0]}" HorizontalAlignment="Center"/>
                         <Grid RowDefinitions="*,*,*,*,*,*,*,*,*,*">
                             <Grid Grid.Row="0" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*">
                                 <ToggleButton Grid.Column="0" Content="{Binding PB[0][0][0], Mode=OneWay}" Margin="5" Checked="ButtonChecked" IsEnabled="False" IsChecked="{Binding !#StartGame.IsEnabled}" Name="P00"/>
@@ -302,6 +300,7 @@
                         </Grid>
                     </StackPanel>
                 </StackPanel>
+				<TextBlock Text="{Binding HowManyShips}" HorizontalAlignment="Center"/>
             </StackPanel>
         </Panel>
     </Panel>
