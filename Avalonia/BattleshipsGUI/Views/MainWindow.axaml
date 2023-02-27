@@ -32,6 +32,6 @@
             <views:GameplayView/>
         </Panel>
         
-        <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" Content="H"/>
+        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" Content="H"/>
     </Panel>
 </Window>

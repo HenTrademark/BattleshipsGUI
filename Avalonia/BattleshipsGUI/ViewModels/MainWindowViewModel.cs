@@ -27,7 +27,7 @@ public class MainWindowViewModel : ViewModelBase {
         get => _carriers;
         set {
             this.RaiseAndSetIfChanged(ref _carriers, value);
-            File.WriteAllText("./Ships/Carrier.txt",_carriers.ToString());
+            File.WriteAllText("./Dependencies/Ships/Carrier.txt",_carriers.ToString());
         }
     }
 
@@ -36,7 +36,7 @@ public class MainWindowViewModel : ViewModelBase {
         get => _destroyers;
         set { 
             this.RaiseAndSetIfChanged(ref _destroyers, value);
-            File.WriteAllText("./Ships/Destroyer.txt",_destroyers.ToString());
+            File.WriteAllText("./Dependencies/Ships/Destroyer.txt",_destroyers.ToString());
         }
     }
 
@@ -45,7 +45,7 @@ public class MainWindowViewModel : ViewModelBase {
         get => _ships;
         set {
             this.RaiseAndSetIfChanged(ref _ships, value);
-            File.WriteAllText("./Ships/Ship.txt",_ships.ToString());
+            File.WriteAllText("./Dependencies/Ships/Ship.txt",_ships.ToString());
         }
     }
 
@@ -54,17 +54,17 @@ public class MainWindowViewModel : ViewModelBase {
         get => _patrols;
         set {
             this.RaiseAndSetIfChanged(ref _patrols, value);
-            File.WriteAllText("./Ships/Patrol.txt",_patrols.ToString());
+            File.WriteAllText("./Dependencies/Ships/Patrol.txt",_patrols.ToString());
         }
     }
 
     private int[] _count = new int[4];
 
     public void BoardValues() {
-        int carrier = int.Parse(File.ReadAllText("./Ships/Carrier.txt"));
-        int destroyer = int.Parse(File.ReadAllText("./Ships/Destroyer.txt"));
-        int ship = int.Parse(File.ReadAllText("./Ships/Ship.txt"));
-        int patrol = int.Parse(File.ReadAllText("./Ships/Patrol.txt"));
+        int carrier = int.Parse(File.ReadAllText("./Dependencies/Ships/Carrier.txt"));
+        int destroyer = int.Parse(File.ReadAllText("./Dependencies/Ships/Destroyer.txt"));
+        int ship = int.Parse(File.ReadAllText("./Dependencies/Ships/Ship.txt"));
+        int patrol = int.Parse(File.ReadAllText("./Dependencies/Ships/Patrol.txt"));
         int[] count = { carrier, destroyer, ship, patrol };
         for (int i = 0; i < 4; i++) {
             if (count[i] == -1) {
@@ -78,7 +78,7 @@ public class MainWindowViewModel : ViewModelBase {
             }
         }
 
-        if (count[3] == 9) { count[3] = -1; } 
+        count[3] = count[3] == 9 ? -1 : count[3];
         _count = new int[] { count[0]+1, count[1]+1, count[2]+1, count[3]+1  };
     }
 
@@ -97,7 +97,13 @@ public class MainWindowViewModel : ViewModelBase {
     private void StartTheGame() {
         BoardValues();
         MakeTheBoard();
-        MakePlayerBoard();
+        _shipsleft = (_count[0] * 5) + (_count[1] * 4) + (_count[2] * 3) + (_count[3] * 2);
+        HowManyShips = "Ships left: " + _shipsleft.ToString();
+    }
+
+    private void UpdateCounter() {
+        _shipsleft -= 1;
+        HowManyShips = "Ships left: " + _shipsleft.ToString();
     }
 
     public void SinkShip() {
@@ -116,7 +122,7 @@ public class MainWindowViewModel : ViewModelBase {
             this.RaiseAndSetIfChanged(ref PlayerBoard, value);
             for (int row = 0; row < 10; row++) {
                 for (int col = 0; col < 10; col++) {
-                    File.WriteAllText("./Board/P" + row.ToString() + col.ToString(),PlayerBoard[row][col]);
+                    File.WriteAllText("./Dependencies/Board/P" + row.ToString() + col.ToString(),PlayerBoard[row][col]);
                 }
             }
         }
@@ -128,14 +134,25 @@ public class MainWindowViewModel : ViewModelBase {
             this.RaiseAndSetIfChanged(ref PlayerBoard, value);
             for (int row = 0; row < 10; row++) {
                 for (int col = 0; col < 10; col++) {
-                    File.WriteAllText("./Board/B" + row.ToString() + col.ToString(),BotBoard[row][col]);
+                    File.WriteAllText("./Dependencies/Board/B" + row.ToString() + col.ToString(),BotBoard[row][col]);
                 }
             }
         }
     }
 
-    public void Clicked() {
-        BB[0][0] = "Haha";
+    public void Clicked(string name) {
+        (int, int) coords = (int.Parse(name[1].ToString()), int.Parse(name[2].ToString()));
+        string plot = BB[coords.Item1][coords.Item2];
+        if (plot != "O") {
+            UpdateCounter();
+        }
+    }
+
+    private int _shipsleft = 0;
+    private string _howmanyships;
+    public string HowManyShips {
+        get => _howmanyships;
+        set => this.RaiseAndSetIfChanged(ref _howmanyships, value);
     }
 
     public string[][] PlayerBoard = { 
@@ -167,33 +184,6 @@ public class MainWindowViewModel : ViewModelBase {
 
 class Battleships {
     private static Random _rand = new();
-    
-    public static string[][] Bot = { 
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" }, 
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" } 
-    };
-    
-    public static string[][] Player = { 
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" }, 
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" },
-        new[] { "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" } 
-    };
-
     public static int MakeBoard(string[][] board, int[] count) {
             bool validplace;
             int plots = 0;

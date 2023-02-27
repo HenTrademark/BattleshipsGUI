@@ -11,21 +11,23 @@ namespace BattleshipsGUI.Views;
 
 public partial class GameplayView : UserControl {
     private MainWindowViewModel _mwvm = new MainWindowViewModel();
-    public GameplayView() {
-        Directory.CreateDirectory("./Ships");
-        File.WriteAllText("./Ships/" + "Carrier" + ".txt","-1");
-        File.WriteAllText("./Ships/" + "Destroyer" + ".txt","-1");
-        File.WriteAllText("./Ships/" + "Ship" + ".txt","-1");
-        File.WriteAllText("./Ships/" + "Patrol" + ".txt","-1");
-        Directory.CreateDirectory("./Board");
+    public GameplayView()
+    {
+        Directory.CreateDirectory("./Dependencies");
+        Directory.CreateDirectory("./Dependencies/Ships");
+        File.WriteAllText("./Dependencies/Ships/" + "Carrier" + ".txt","-1");
+        File.WriteAllText("./Dependencies/Ships/" + "Destroyer" + ".txt","-1");
+        File.WriteAllText("./Dependencies/Ships/" + "Ship" + ".txt","-1");
+        File.WriteAllText("./Dependencies/Ships/" + "Patrol" + ".txt","-1");
+        Directory.CreateDirectory("./Dependencies/Board");
         for (int a = 0; a < 10; a++) {
             for (int b = 0; b < 10; b++) {
-                File.WriteAllText("./Board/P" + a.ToString() + b.ToString() + ".txt","O");
+                File.WriteAllText("./Dependencies/Board/P" + a.ToString() + b.ToString() + ".txt","O");
             }
         }
         for (int a = 0; a < 10; a++) {
             for (int b = 0; b < 10; b++) {
-                File.WriteAllText("./Board/B" + a.ToString() + b.ToString() + ".txt","O");
+                File.WriteAllText("./Dependencies/Board/B" + a.ToString() + b.ToString() + ".txt","O");
             }
         }
         InitializeComponent();
@@ -40,7 +42,7 @@ public partial class GameplayView : UserControl {
     }
     
     private void ButtonOnClick(object? o, RoutedEventArgs e) {
-        string name = File.ReadAllText("./Board/P" + ((Button)o).Name[1] + ((Button)o).Name[2]);
+        string name = File.ReadAllText("./Dependencies/Board/B" + ((Button)o).Name[1] + ((Button)o).Name[2]);
         name = name == "O" ? "X" : name;
         ((Button)o).Content = name[0];
         ((Button)o).IsEnabled = false;
