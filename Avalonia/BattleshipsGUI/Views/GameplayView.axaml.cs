@@ -10,7 +10,6 @@ using ReactiveUI;
 namespace BattleshipsGUI.Views; 
 
 public partial class GameplayView : UserControl {
-    private MainWindowViewModel _mwvm = new MainWindowViewModel();
     public GameplayView()
     {
         Directory.CreateDirectory("./Dependencies");
