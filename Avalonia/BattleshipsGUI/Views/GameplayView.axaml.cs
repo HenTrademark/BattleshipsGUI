@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -40,17 +41,14 @@ public partial class GameplayView : UserControl {
         ((Button)o!).IsEnabled = false;
     }
     
-    private void ButtonOnClick(object? o, RoutedEventArgs e) {
-        string name = File.ReadAllText("./Dependencies/Board/B" + ((Button)o).Name[1] + ((Button)o).Name[2]);
+    private void ButtonOnClick(object o, RoutedEventArgs e) {
+        string name = File.ReadAllText("./Dependencies/Board/B" + ((Button)o).Name[1] + ((Button)o).Name[2] + ".txt");
         name = name == "O" ? "X" : name;
         ((Button)o).Content = name[0];
         ((Button)o).IsEnabled = false;
     }
 
-    private void ButtonChecked(object? o, RoutedEventArgs e) {
-        
-    }
-
-    private void BeingInitialised(object? o, EventArgs e) {
+    private void ButtonChecked(object o, RoutedEventArgs e) {
+        ((Button)o!).Content = File.ReadAllText("./Dependencies/Board/P" + ((Button)o).Name[1] + ((Button)o).Name[2] + ".txt");
     }
 }
