@@ -54,12 +54,39 @@ public class MainWindowViewModel : ViewModelBase {
         }
     }
 
+    private bool _startVisible = true;
+    public bool StartVisible {
+        get => _startVisible;
+        set => this.RaiseAndSetIfChanged(ref _startVisible, value);
+    }
+    
+    private bool _gameFinished = true;
+    public bool GameFinished {
+        get => _gameFinished;
+        set => this.RaiseAndSetIfChanged(ref _gameFinished, value);
+    }
+    
+    private bool _winShown = false;
+    public bool WinShown {
+        get => _winShown;
+        set => this.RaiseAndSetIfChanged(ref _winShown, value);
+    }
+    
+    private bool _lossShown = false;
+    public bool LossShown {
+        get => _lossShown;
+        set => this.RaiseAndSetIfChanged(ref _lossShown, value);
+    }
     private void StartTheGame() {
         BoardValues();
         MakeBotBoard();
         MakePlayerBoard();
-        EnemyShipsLeft = _count[0] * 5 + _count[1] * 4 + _count[2] * 3 + _count[3] * 2;
-        HowManyShips = "Ships left: " + EnemyShipsLeft.ToString();
+        HowManyEnemies = "Enemies left: " + EnemyShipsLeft.ToString();
+        HowManyShips = "Ships left: " + PlayerShipsLeft.ToString();
+        StartVisible = false;
+        GameFinished = false;
+        UpdatePlayerBoard = true;
+        UpdatePlayerBoard = false;
     }
 
     private int[] _count = new int[4];
@@ -72,19 +99,18 @@ public class MainWindowViewModel : ViewModelBase {
         int[] count = { carrier, destroyer, ship, patrol };
         for (int i = 0; i < 4; i++) {
             if (count[i] == -1) {
-                Random r = new Random();
                 switch (i) {
                     case 0:
-                        count[i] = r.Next(3);
+                        count[i] = _rand.Next(3);
                         break;
                     case 1:
-                        count[i] = r.Next(4);
+                        count[i] = _rand.Next(4);
                         break;
                     case 2:
-                        count[i] = r.Next(6);
+                        count[i] = _rand.Next(6);
                         break;
                     case 3:
-                        count[i] = r.Next(-1, 9);
+                        count[i] = _rand.Next(-1, 9);
                         break;
                 }
             }
@@ -93,9 +119,8 @@ public class MainWindowViewModel : ViewModelBase {
         count[3] = count[3] == 9 ? -1 : count[3];
         _count = new[] { count[0] + 1, count[1] + 1, count[2] + 1, count[3] + 1 };
     }
-
-    private int _boardCount;
     public void MakeBotBoard() {
+        EnemyShipsLeft = 0;
         bool validplace;
         for (var x = 0; x < _count[0]; x++) {
             validplace = false;
@@ -159,7 +184,7 @@ public class MainWindowViewModel : ViewModelBase {
                         break;
                 }
             }
-            _botCount += 5;
+            EnemyShipsLeft += 5;
         }
         for (var x = 0; x < _count[1]; x++) {
             validplace = false;
@@ -215,7 +240,7 @@ public class MainWindowViewModel : ViewModelBase {
                         break;
                 }
             }
-            _botCount += 4;
+            EnemyShipsLeft += 4;
         }
         for (var x = 0; x < _count[2]; x++) {
             validplace = false;
@@ -267,7 +292,7 @@ public class MainWindowViewModel : ViewModelBase {
                         break;
                 }
             }
-            _botCount += 3;
+            EnemyShipsLeft += 3;
         }
 
         for (var x = 0; x < _count[3]; x++) {
@@ -308,13 +333,12 @@ public class MainWindowViewModel : ViewModelBase {
                         break;
                 }
             }
-            _botCount += 2;
+            EnemyShipsLeft += 2;
         }
         BB = BotBoard;
     }
-
-    private int _botCount;
     public void MakePlayerBoard() {
+        PlayerShipsLeft = 0;
         bool validplace;
         for (var x = 0; x < _count[0]; x++) {
             validplace = false;
@@ -378,7 +402,7 @@ public class MainWindowViewModel : ViewModelBase {
                         break;
                 }
             }
-            _botCount += 5;
+            PlayerShipsLeft += 5;
         }
         for (var x = 0; x < _count[1]; x++) {
             validplace = false;
@@ -434,7 +458,7 @@ public class MainWindowViewModel : ViewModelBase {
                         break;
                 }
             }
-            _botCount += 4;
+            PlayerShipsLeft += 4;
         }
         for (var x = 0; x < _count[2]; x++) {
             validplace = false;
@@ -486,7 +510,7 @@ public class MainWindowViewModel : ViewModelBase {
                         break;
                 }
             }
-            _botCount += 3;
+            PlayerShipsLeft += 3;
         }
 
         for (var x = 0; x < _count[3]; x++) {
@@ -527,45 +551,66 @@ public class MainWindowViewModel : ViewModelBase {
                         break;
                 }
             }
-            _botCount += 2;
+            PlayerShipsLeft += 2;
         }
         PB = PlayerBoard;
     }
-    
-    public int EnemyShipsLeft = -1;
-    private string _howManyShips = "";
 
+    public int EnemyShipsLeft = -1;
+    public int PlayerShipsLeft = -1;
+    
+    private string _howManyEnemies = "";
+    public string HowManyEnemies {
+        get => _howManyEnemies;
+        set => this.RaiseAndSetIfChanged(ref _howManyEnemies, value);
+    }
+    
+    private string _howManyShips = "";
     public string HowManyShips {
         get => _howManyShips;
         set => this.RaiseAndSetIfChanged(ref _howManyShips, value);
     }
 
-    public void Clicked(string name) {
-        (int, int) coords = (int.Parse(name[1].ToString()), int.Parse(name[2].ToString()));
-        string plot = BB[coords.Item1][coords.Item2];
-        if (plot != "O") {
-            UpdateCounter();
-        }
-        SinkShip();
+    private bool _updatePlayerBoard = false;
+    public bool UpdatePlayerBoard {
+        get => _updatePlayerBoard;
+        set => this.RaiseAndSetIfChanged(ref _updatePlayerBoard, value);
     }
 
-    private void UpdateCounter() {
-        EnemyShipsLeft -= 1;
-        HowManyShips = "Ships left: " + EnemyShipsLeft.ToString();
+    public void Clicked(string name) {
+        string plot = BB[int.Parse(name[1].ToString())][int.Parse(name[2].ToString())];
+        if (plot != "O") {
+            EnemyShipsLeft -= 1;
+            HowManyEnemies = "Enemies left: " + EnemyShipsLeft.ToString();
+        }
+        GameFinished = !StartVisible && EnemyShipsLeft == 0;
+        if (!_gameFinished) {
+            SinkShip();
+            UpdatePlayerBoard = true;
+            UpdatePlayerBoard = false;
+            HowManyShips = "Ships left: " + PlayerShipsLeft.ToString();
+            GameFinished = !StartVisible && PlayerShipsLeft == 0;
+        }
+        WinShown = GameFinished && EnemyShipsLeft == 0;
+        LossShown = GameFinished && PlayerShipsLeft == 0;
     }
 
     public void SinkShip() {
-        int row; //= new Random().Next(10);
-        int col; //= new Random().Next(10);
-        row = 0;
-        col = 0;
+        int row, col;
+        string plot;
 
-
-        PB[row][col] = "Haha";
+        do {
+            row = _rand.Next(10);
+            col = _rand.Next(10);
+            plot = PB[row][col];
+        } while (plot == "X" || plot == "H");
+        
+        PlayerBoard[row][col] = plot == "O" ? "X" : plot;
+        PlayerShipsLeft = plot == "O" ? PlayerShipsLeft : PlayerShipsLeft - 1;
+        File.WriteAllText("./Dependencies/Board/P" + row.ToString() + col.ToString() + ".txt",
+            PlayerBoard[row][col]);
     }
-
     
-
     public string[][] PB {
         get => PlayerBoard;
         set {

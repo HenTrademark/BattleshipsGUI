@@ -49,6 +49,6 @@ public partial class GameplayView : UserControl {
     }
 
     private void ButtonChecked(object o, RoutedEventArgs e) {
-        ((Button)o!).Content = File.ReadAllText("./Dependencies/Board/P" + ((Button)o).Name[1] + ((Button)o).Name[2] + ".txt");
+        ((Button)o!).Content = File.ReadAllText("./Dependencies/Board/P" + ((Button)o).Name[1] + ((Button)o).Name[2] + ".txt")[0];
     }
 }
